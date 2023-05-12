@@ -17,6 +17,7 @@ namespace Asteroids_in_space
         public double timer = 2D;
         public double maxTime = 2D;
         public int nextSpeed = 740;
+        public float totalTime = 0f;
 
         public bool inGame = false;
         public void conUpdate(GameTime gameTime)
@@ -24,6 +25,7 @@ namespace Asteroids_in_space
             if (inGame)
             {
                 timer -= gameTime.ElapsedGameTime.TotalSeconds;
+                totalTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
             else
             {
@@ -31,6 +33,10 @@ namespace Asteroids_in_space
                 if (kState.IsKeyDown(Keys.Enter))
                 {
                     inGame = true;
+                    totalTime = 0f;
+                    timer = 2D;
+                    maxTime = 2D;
+                    nextSpeed = 740;
                 }
             }
 

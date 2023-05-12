@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -30,7 +31,6 @@ namespace Asteroids_in_space
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
 
             base.Initialize();
         }
@@ -59,6 +59,11 @@ namespace Asteroids_in_space
             {
                 gameController.asteroids[i].asteroidsUpdate(gameTime);
 
+                if (gameController.asteroids[i].position.X < (0 - gameController.asteroids[i].radius))
+                {
+                    gameController.asteroids[i].offscreen = true;
+                }
+
                 int sum = gameController.asteroids[i].radius + 30;
                 if (Vector2.Distance(gameController.asteroids[i].position, player.position) < sum)
                 {
@@ -69,6 +74,7 @@ namespace Asteroids_in_space
                 }
             }
 
+            gameController.asteroids.RemoveAll(a => a.offscreen);
             base.Update(gameTime);
         }
 
@@ -77,6 +83,7 @@ namespace Asteroids_in_space
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
+
             spriteBatch.Draw(space_Sprite, new Vector2(0, 0), Color.White);
             spriteBatch.Draw(ship_Sprite, new Vector2(player.position.X - 34, player.position.Y - 50), Color.White);
 
@@ -93,8 +100,10 @@ namespace Asteroids_in_space
                 int tempRadius = gameController.asteroids[i].radius;
                 spriteBatch.Draw(asteroids_Sprite, new Vector2(tempPos.X - tempRadius, tempPos.Y - tempRadius), Color.White);
             }
-            spriteBatch.End();
 
+            spriteBatch.DrawString(timerFont, "Time: "+ Math.Floor(gameController.totalTime).ToString(),new Vector2(3,3), Color.White);
+
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
