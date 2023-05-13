@@ -1,3 +1,3 @@
 ﻿
-using var game = new Asteroids_in_space.Game1();
+using var game = new Meteorits_in_space.Game1();
 game.Run();

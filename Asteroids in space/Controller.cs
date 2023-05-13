@@ -9,11 +9,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 
-namespace Asteroids_in_space
+namespace Meteorits_in_space
 {
     class Controller
     {
-        public List<Asteroids> Asteroids = new List<Asteroids>();
+        public List<Meteorits> Meteorits = new List<Meteorits>();
         public double timer = 2D;
         public double maxTime = 2D;
         public int nextSpeed = 840;
@@ -42,7 +42,7 @@ namespace Asteroids_in_space
 
             if (timer <= 0)
             {
-                Asteroids.Add(new Asteroids(nextSpeed));
+                Meteorits.Add(new Meteorits(nextSpeed));
                 timer = maxTime;
                 if (maxTime > 0.5)
                 {

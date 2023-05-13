@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Asteroids_in_space
+namespace Meteorits_in_space
 {
-    class Asteroids
+    class Meteorits
     {
         public Vector2 position;
         public int speed;
@@ -18,13 +18,13 @@ namespace Asteroids_in_space
         public bool offscreen = false;
 
         static Random rand = new Random();
-        public Asteroids(int newSpeed)
+        public Meteorits(int newSpeed)
         {
             speed = newSpeed;
 
             position = new Vector2(1280 + radius, rand.Next(0, 721));
         }
-        public void AsteroidsUpdate(GameTime gameTime)
+        public void MeteoritsUpdate(GameTime gameTime)
         {
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
             position.X -= speed * dt;

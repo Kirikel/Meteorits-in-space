@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Asteroids_in_space
+namespace Meteorits_in_space
 {
     public class Game1 : Game
     {
@@ -11,7 +11,7 @@ namespace Asteroids_in_space
         private SpriteBatch spriteBatch;
 
         Texture2D ship_Sprite;
-        Texture2D asteroids_Sprite;
+        Texture2D Meteorits_Sprite;
         Texture2D space_Sprite;
 
         SpriteFont gameFont;
@@ -40,7 +40,7 @@ namespace Asteroids_in_space
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             ship_Sprite = Content.Load<Texture2D>("ship");
-            asteroids_Sprite = Content.Load<Texture2D>("asteroid");
+            Meteorits_Sprite = Content.Load<Texture2D>("asteroid");
             space_Sprite = Content.Load<Texture2D>("space");
 
             gameFont = Content.Load<SpriteFont>("spaceFont");
@@ -55,26 +55,26 @@ namespace Asteroids_in_space
             player.shipUpdate(gameTime, gameController);
             gameController.conUpdate(gameTime);
 
-            for (int i = 0; i < gameController.Asteroids.Count; i++)
+            for (int i = 0; i < gameController.Meteorits.Count; i++)
             {
-                gameController.Asteroids[i].AsteroidsUpdate(gameTime);
+                gameController.Meteorits[i].MeteoritsUpdate(gameTime);
 
-                if (gameController.Asteroids[i].position.X < (0 - gameController.Asteroids[i].radius))
+                if (gameController.Meteorits[i].position.X < (0 - gameController.Meteorits[i].radius))
                 {
-                    gameController.Asteroids[i].offscreen = true;
+                    gameController.Meteorits[i].offscreen = true;
                 }
 
-                int sum = gameController.Asteroids[i].radius + 30;
-                if (Vector2.Distance(gameController.Asteroids[i].position, player.position) < sum)
+                int sum = gameController.Meteorits[i].radius + 30;
+                if (Vector2.Distance(gameController.Meteorits[i].position, player.position) < sum)
                 {
                     gameController.inGame = false;
                     player.position = Ship.defaultPosition;
-                    i = gameController.Asteroids.Count;
-                    gameController.Asteroids.Clear();
+                    i = gameController.Meteorits.Count;
+                    gameController.Meteorits.Clear();
                 }
             }
 
-            gameController.Asteroids.RemoveAll(a => a.offscreen);   
+            gameController.Meteorits.RemoveAll(a => a.offscreen);   
             base.Update(gameTime);
         }
 
@@ -94,11 +94,11 @@ namespace Asteroids_in_space
                 spriteBatch.DrawString(gameFont, menuMessage, new Vector2(640 - sizeOfText.X / 2, 200), Color.White);
             }
 
-            for (int i = 0; i < gameController.Asteroids.Count; i++)
+            for (int i = 0; i < gameController.Meteorits.Count; i++)
             {
-                Vector2 tempPos = gameController.Asteroids[i].position;
-                int tempRadius = gameController.Asteroids[i].radius;
-                spriteBatch.Draw(asteroids_Sprite, new Vector2(tempPos.X - tempRadius, tempPos.Y - tempRadius), Color.White);
+                Vector2 tempPos = gameController.Meteorits[i].position;
+                int tempRadius = gameController.Meteorits[i].radius;
+                spriteBatch.Draw(Meteorits_Sprite, new Vector2(tempPos.X - tempRadius, tempPos.Y - tempRadius), Color.White);
             }
 
             spriteBatch.DrawString(timerFont, "Time: "+ Math.Floor(gameController.totalTime).ToString(),new Vector2(3,3), Color.White);
