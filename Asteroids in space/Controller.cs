@@ -13,10 +13,10 @@ namespace Asteroids_in_space
 {
     class Controller
     {
-        public List<asteroids> asteroids = new List<asteroids>();
+        public List<Asteroids> Asteroids = new List<Asteroids>();
         public double timer = 2D;
         public double maxTime = 2D;
-        public int nextSpeed = 740;
+        public int nextSpeed = 840;
         public float totalTime = 0f;
 
         public bool inGame = false;
@@ -36,13 +36,13 @@ namespace Asteroids_in_space
                     totalTime = 0f;
                     timer = 2D;
                     maxTime = 2D;
-                    nextSpeed = 740;
+                    nextSpeed = 840;
                 }
             }
 
             if (timer <= 0)
             {
-                asteroids.Add(new asteroids(nextSpeed));
+                Asteroids.Add(new Asteroids(nextSpeed));
                 timer = maxTime;
                 if (maxTime > 0.5)
                 {
@@ -57,4 +57,4 @@ namespace Asteroids_in_space
         }
     }
 }
-//в контроллере 240 было стало 740
+//стало 840

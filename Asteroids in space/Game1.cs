@@ -55,26 +55,26 @@ namespace Asteroids_in_space
             player.shipUpdate(gameTime, gameController);
             gameController.conUpdate(gameTime);
 
-            for (int i = 0; i < gameController.asteroids.Count; i++)
+            for (int i = 0; i < gameController.Asteroids.Count; i++)
             {
-                gameController.asteroids[i].asteroidsUpdate(gameTime);
+                gameController.Asteroids[i].AsteroidsUpdate(gameTime);
 
-                if (gameController.asteroids[i].position.X < (0 - gameController.asteroids[i].radius))
+                if (gameController.Asteroids[i].position.X < (0 - gameController.Asteroids[i].radius))
                 {
-                    gameController.asteroids[i].offscreen = true;
+                    gameController.Asteroids[i].offscreen = true;
                 }
 
-                int sum = gameController.asteroids[i].radius + 30;
-                if (Vector2.Distance(gameController.asteroids[i].position, player.position) < sum)
+                int sum = gameController.Asteroids[i].radius + 30;
+                if (Vector2.Distance(gameController.Asteroids[i].position, player.position) < sum)
                 {
                     gameController.inGame = false;
                     player.position = Ship.defaultPosition;
-                    i = gameController.asteroids.Count;
-                    gameController.asteroids.Clear();
+                    i = gameController.Asteroids.Count;
+                    gameController.Asteroids.Clear();
                 }
             }
 
-            gameController.asteroids.RemoveAll(a => a.offscreen);
+            gameController.Asteroids.RemoveAll(a => a.offscreen);   
             base.Update(gameTime);
         }
 
@@ -94,10 +94,10 @@ namespace Asteroids_in_space
                 spriteBatch.DrawString(gameFont, menuMessage, new Vector2(640 - sizeOfText.X / 2, 200), Color.White);
             }
 
-            for (int i = 0; i < gameController.asteroids.Count; i++)
+            for (int i = 0; i < gameController.Asteroids.Count; i++)
             {
-                Vector2 tempPos = gameController.asteroids[i].position;
-                int tempRadius = gameController.asteroids[i].radius;
+                Vector2 tempPos = gameController.Asteroids[i].position;
+                int tempRadius = gameController.Asteroids[i].radius;
                 spriteBatch.Draw(asteroids_Sprite, new Vector2(tempPos.X - tempRadius, tempPos.Y - tempRadius), Color.White);
             }
 
